@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>VigiDengue</title>
+
+<style>
+
+/* ===== RESET ===== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+    scroll-behavior:smooth;
+}
+
+/* ===== BODY ===== */
+
+body{
+
+    background:
+    linear-gradient(rgba(0,0,0,0.78), rgba(0,0,0,0.78)),
+    url('https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?q=80&w=1974&auto=format&fit=crop') center/cover fixed;
+
+    color:white;
+    overflow-x:hidden;
+}
+
+/* ===== HEADER ===== */
+
+header{
+
+    width:100%;
+    position:fixed;
+    top:0;
+    left:0;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:12px 4%;
+
+    z-index:999;
+
+    background:rgba(0,0,0,0.18);
+
+    backdrop-filter:blur(10px);
+
+    border-bottom:1px solid rgba(255,255,255,0.05);
+}
+
+/* ===== LOGO ===== */
+
+.logo{
+
+    font-size:24px;
+    font-weight:bold;
+
+    color:#00ff99;
+
+    text-shadow:0 0 10px rgba(0,255,153,0.3);
+}
+
+/* ===== MENU ===== */
+
+nav{
+
+    display:flex;
+    gap:8px;
+    align-items:center;
+    flex-wrap:wrap;
+}
+
+nav a{
+
+    text-decoration:none;
+    color:white;
+
+    padding:6px 12px;
+
+    font-size:13px;
+
+    border-radius:12px;
+
+    background:rgba(255,255,255,0.06);
+
+    border:1px solid rgba(255,255,255,0.08);
+
+    backdrop-filter:blur(5px);
+
+    transition:0.3s;
+
+    font-weight:500;
+}
+
+nav a:hover{
+
+    background:linear-gradient(
+    135deg,
+    rgba(0,200,83,0.7),
+    rgba(0,150,136,0.7)
+    );
+
+    transform:translateY(-2px);
+}
+
+/* ===== SECTIONS ===== */
+
+section{
+
+    min-height:100vh;
+
+    padding:120px 8% 70px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+/* ===== CONTAINER ===== */
+
+.container{
+
+    width:100%;
+    max-width:1200px;
+
+    background:rgba(255,255,255,0.05);
+
+    border:1px solid rgba(255,255,255,0.08);
+
+    backdrop-filter:blur(12px);
+
+    border-radius:30px;
+
+    padding:50px;
+
+    box-shadow:0 10px 40px rgba(0,0,0,0.45);
+}
+
+/* ===== TITLES ===== */
+
+h1{
+
+    font-size:60px;
+
+    margin-bottom:20px;
+
+    color:#00ff99;
+}
+
+h2{
+
+    font-size:40px;
+
+    margin-bottom:25px;
+
+    color:#00ff99;
+}
+
+h3{
+
+    margin-bottom:14px;
+
+    color:#00ff99;
+
+    font-size:24px;
+}
+
+/* ===== TEXT ===== */
+
+p{
+
+    font-size:20px;
+
+    line-height:1.8;
+
+    color:#e8e8e8;
+}
+
+/* ===== BUTTON ===== */
+
+.btn{
+
+    display:inline-block;
+
+    margin-top:25px;
+
+    padding:14px 28px;
+
+    border-radius:30px;
+
+    text-decoration:none;
+
+    color:white;
+
+    font-weight:bold;
+
+    background:linear-gradient(
+    135deg,
+    #00c853,
+    #009688
+    );
+
+    transition:0.4s;
+
+    border:none;
+    cursor:pointer;
+}
+
+.btn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 6px 20px rgba(0,255,153,0.3);
+}
+
+/* ===== CARDS ===== */
+
+.cards{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+    gap:22px;
+
+    margin-top:35px;
+}
+
+.card{
+
+    background:rgba(255,255,255,0.06);
+
+    border:1px solid rgba(255,255,255,0.08);
+
+    border-radius:24px;
+
+    padding:30px;
+
+    transition:0.4s;
+}
+
+.card:hover{
+
+    transform:translateY(-5px);
+
+    background:rgba(255,255,255,0.1);
+}
+
+/* ===== BOXES ===== */
+
+.localizacao-box,
+.upload-box,
+.obrigado-box,
+.mapa-box{
+
+    margin-top:30px;
+
+    background:rgba(255,255,255,0.05);
+
+    padding:35px;
+
+    border-radius:25px;
+
+    border:1px solid rgba(255,255,255,0.08);
+}
+
+/* ===== INPUTS ===== */
+
+input,
+textarea{
+
+    width:100%;
+
+    padding:15px;
+
+    margin-top:15px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:rgba(255,255,255,0.08);
+
+    color:white;
+
+    font-size:15px;
+}
+
+textarea{
+
+    height:140px;
+
+    resize:none;
+}
+
+input[type="checkbox"]{
+
+    width:auto;
+}
+
+/* ===== FOOTER ===== */
+
+footer{
+
+    text-align:center;
+
+    padding:30px;
+
+    background:rgba(0,0,0,0.45);
+
+    color:#cfcfcf;
+}
+
+/* ===== RESPONSIVO ===== */
+
+@media(max-width:900px){
+
+    header{
+
+        flex-direction:column;
+        gap:10px;
+    }
+
+    nav{
+
+        justify-content:center;
+    }
+
+    h1{
+
+        font-size:42px;
+    }
+
+    h2{
+
+        font-size:30px;
+    }
+
+    p{
+
+        font-size:18px;
+    }
+
+    .container{
+
+        padding:35px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ===== MENU ===== -->
+
+<header>
+
+<div class="logo">
+🦟 VigiDengue
+</div>
+
+<nav>
+
+<a href="#inicio">Início</a>
+<a href="#sobre">Sobre</a>
+<a href="#denuncias">Denúncias</a>
+<a href="#localizacao">Localização</a>
+<a href="#midia">Fotos</a>
+<a href="#mapa">Mapa</a>
+<a href="#obrigado">Obrigado</a>
+
+</nav>
+
+</header>
+
+<!-- ===== INÍCIO ===== -->
+
+<section id="inicio">
+
+<div class="container">
+
+<h1>
+VigiDengue
+</h1>
+
+<p>
+
+Sistema moderno para denúncias de possíveis focos da dengue, auxiliando agentes de endemias e protegendo a população.
+
+</p>
+
+<a href="#denuncias" class="btn">
+Fazer denúncia
+</a>
+
+</div>
+
+</section>
+
+<!-- ===== SOBRE ===== -->
+
+<section id="sobre">
+
+<div class="container">
+
+<h2>
+⚠️ Sobre a Dengue
+</h2>
+
+<p>
+
+A dengue é transmitida pelo mosquito Aedes aegypti e pode causar febre, dores intensas e complicações graves.
+
+</p>
+
+<div class="cards">
+
+<div class="card">
+
+<h3>
+🪣 Água parada
+</h3>
+
+<p>
+Evite recipientes com água acumulada.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+🧹 Limpeza
+</h3>
+
+<p>
+Mantenha quintais e terrenos limpos.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+🏥 Prevenção
+</h3>
+
+<p>
+Denuncie possíveis focos da dengue.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===== DENÚNCIAS ===== -->
+
+<section id="denuncias">
+
+<div class="container">
+
+<h2>
+📢 Área de Denúncias
+</h2>
+
+<div class="cards">
+
+<div class="card">
+
+<h3>
+📍 Localização
+</h3>
+
+<p>
+Compartilhe sua localização.
+</p>
+
+<a href="#localizacao" class="btn">
+Abrir
+</a>
+
+</div>
+
+<div class="card">
+
+<h3>
+📸 Fotos/Vídeos
+</h3>
+
+<p>
+Envie imagens do possível foco.
+</p>
+
+<a href="#midia" class="btn">
+Abrir
+</a>
+
+</div>
+
+<div class="card">
+
+<h3>
+🕶️ Denúncia Anônima
+</h3>
+
+<p>
+Envie denúncias sem identificação.
+</p>
+
+<label style="display:flex;align-items:center;gap:10px;margin-top:15px;">
+
+<input type="checkbox">
+
+<span>Desejo permanecer anônimo</span>
+
+</label>
+
+</div>
+
+<div class="card">
+
+<h3>
+📲 WhatsApp
+</h3>
+
+<p>
+Contato rápido com agentes.
+</p>
+
+<a href="https://wa.me/5534999999999" target="_blank" class="btn">
+Abrir
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===== LOCALIZAÇÃO ===== -->
+
+<section id="localizacao">
+
+<div class="container">
+
+<h2>
+📍 Compartilhar localização
+</h2>
+
+<div class="localizacao-box">
+
+<p>
+
+Permitir acesso à localização do celular.
+
+</p>
+
+<a class="btn" onclick="mostrarLocalizacao()">
+Permitir
+</a>
+
+<p id="resultadoLocalizacao" style="margin-top:20px;"></p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===== MIDIA ===== -->
+
+<section id="midia">
+
+<div class="container">
+
+<h2>
+📸 Fotos e vídeos
+</h2>
+
+<p>
+
+Envie endereço, imagens e informações adicionais.
+
+</p>
+
+<div class="upload-box">
+
+<input 
+type="text" 
+placeholder="Digite o endereço">
+
+<textarea
+placeholder="Informações adicionais sobre a denúncia"></textarea>
+
+<input 
+type="file" 
+accept="image/,video/">
+
+<a href="#obrigado" class="btn">
+Enviar denúncia
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===== MAPA ===== -->
+
+<section id="mapa">
+
+<div class="container">
+
+<h2>
+🗺️ Mapa de Risco da Dengue
+</h2>
+
+<p>
+
+Visualização fictícia das áreas com maior índice de risco e quantidade semanal de casos confirmados.
+
+</p>
+
+<div class="cards">
+
+<div class="card" style="
+background:rgba(255,0,0,0.18);
+border:1px solid rgba(255,0,0,0.35);
+">
+
+<h3>
+🔴 Área 1
+</h3>
+
+<p>
+Risco: Muito Alto
+</p>
+
+<p style="margin-top:10px;">
+Casos confirmados:
+</p>
+
+<h2 style="margin-top:10px;color:#ff4d4d;">
+18
+</h2>
+
+</div>
+
+<div class="card" style="
+background:rgba(255,140,0,0.18);
+border:1px solid rgba(255,140,0,0.35);
+">
+
+<h3>
+🟠 Área 2
+</h3>
+
+<p>
+Risco: Médio
+</p>
+
+<p style="margin-top:10px;">
+Casos confirmados:
+</p>
+
+<h2 style="margin-top:10px;color:#ffb347;">
+7
+</h2>
+
+</div>
+
+<div class="card" style="
+background:rgba(255,255,0,0.15);
+border:1px solid rgba(255,255,0,0.35);
+">
+
+<h3>
+🟡 Área 3
+</h3>
+
+<p>
+Risco: Moderado
+</p>
+
+<p style="margin-top:10px;">
+Casos confirmados:
+</p>
+
+<h2 style="margin-top:10px;color:#ffee58;">
+3
+</h2>
+
+</div>
+
+<div class="card" style="
+background:rgba(0,255,100,0.12);
+border:1px solid rgba(0,255,100,0.30);
+">
+
+<h3>
+🟢 Área 4
+</h3>
+
+<p>
+Risco: Baixo
+</p>
+
+<p style="margin-top:10px;">
+Casos confirmados:
+</p>
+
+<h2 style="margin-top:10px;color:#66ff99;">
+1
+</h2>
+
+</div>
+
+</div>
+
+<div class="mapa-box">
+
+<h3 style="margin-bottom:20px;">
+📍 Visualização do mapa
+</h3>
+
+<div style="
+width:100%;
+height:420px;
+border-radius:20px;
+overflow:hidden;
+position:relative;
+background:#111;
+border:1px solid rgba(255,255,255,0.08);
+">
+
+<img 
+src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/BlankMap-Brazil-MG.svg/1200px-BlankMap-Brazil-MG.svg.png"
+
+style="
+width:100%;
+height:100%;
+object-fit:cover;
+opacity:0.28;
+">
+
+<div style="
+position:absolute;
+top:28%;
+left:46%;
+width:130px;
+height:130px;
+background:rgba(255,0,0,0.5);
+border-radius:50%;
+filter:blur(16px);
+"></div>
+
+<div style="
+position:absolute;
+top:56%;
+left:62%;
+width:90px;
+height:90px;
+background:rgba(255,140,0,0.4);
+border-radius:50%;
+filter:blur(14px);
+"></div>
+
+<div style="
+position:absolute;
+top:40%;
+left:24%;
+width:75px;
+height:75px;
+background:rgba(255,255,0,0.35);
+border-radius:50%;
+filter:blur(12px);
+"></div>
+
+<div style="
+position:absolute;
+bottom:15px;
+right:15px;
+background:rgba(0,0,0,0.55);
+padding:14px;
+border-radius:14px;
+font-size:14px;
+line-height:1.8;
+">
+
+🔴 Alto risco<br>
+🟠 Médio risco<br>
+🟡 Moderado<br>
+🟢 Baixo risco
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===== OBRIGADO ===== -->
+
+<section id="obrigado">
+
+<div class="container">
+
+<div class="obrigado-box">
+
+<h2>
+💚 Obrigado!
+</h2>
+
+<p>
+
+Sua denúncia ajuda no combate à dengue e na proteção da população.
+
+</p>
+
+<a href="#inicio" class="btn">
+Voltar ao início
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===== FOOTER ===== -->
+
+<footer>
+
+© 2026 - VigiDengue
+
+</footer>
+
+<script>
+
+function mostrarLocalizacao(){
+
+const texto = document.getElementById("resultadoLocalizacao");
+
+if(navigator.geolocation){
+
+texto.innerHTML = "📍 Obtendo localização...";
+
+navigator.geolocation.getCurrentPosition(
+
+function(position){
+
+texto.innerHTML =
+
+"✅ Localização enviada com sucesso!<br><br>" +
+
+"Latitude: " + position.coords.latitude +
+
+"<br>Longitude: " + position.coords.longitude;
+
+},
+
+function(){
+
+texto.innerHTML =
+
+"❌ Não foi possível acessar localização.";
+
+}
+
+);
+
+}else{
+
+texto.innerHTML =
+
+"❌ Navegador sem suporte.";
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
